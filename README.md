@@ -1,61 +1,62 @@
-# lm.initial_data (LM-initial-data)
+# lemaitre.initial_data (LM-initial-data)
 
-Certified, differentiable, **parametric** binary-black-hole *initial data* via
-spectral collocation — the code and paper.
+The **initial-data** domain of the [Lemaitre](https://github.com/LemaitreModels/Lemaitre)
+package family: certified, differentiable, **parametric** binary-black-hole
+initial data.
 
-This is the `initial_data` member of the **Lemaitre** package family. It installs
-under the shared `lm` namespace, so once installed:
+This repository is the *umbrella*. It owns the `lemaitre.initial_data` namespace
+level and ships no science — the models live in the two submodules below, each
+its own repository and its own installable distribution.
 
 ```python
-import lm
-lm.initial_data.solver.solver_3d      # the production 3-D xCFC solver
-lm.initial_data.parametric            # the certified/differentiable ROM layer
+import lemaitre as lm
+
+lm.initial_data.conformally_flat    # the published Bowen–York puncture model
+lm.initial_data.curved              # its non-conformally-flat successor
 ```
 
-Sibling repos (`lm.early_inspiral`, `lm.ringdown`, `lm.artwork`)
-slot in under the same `lm.` prefix when installed alongside.
+## The two puncture models
+
+### `conformally_flat` — [`LMID-conformally-flat-puncture`](LMID-conformally-flat-puncture)
+
+Distribution `lemaitre-initial-data-conformally-flat`. **The paper package.**
+
+Certified, differentiable, parametric reduced-order model of the constraint
+solve for quasi-circular **Bowen–York** punctures, up to the 8-D general-spin
+model θ₈ = (b, q, χ_A, χ_B): a spectral xCFC solver on the Ansorg–Brügmann–Tichy
+prolate chart, matrix-free Newton–Krylov, and a Smolyak/Hermite/POD parameter-space
+ROM exposing `solve(θ, guess)` and the tangent `dU/dθ`. Ships `paper/` — the code
+and the paper together.
+
+### `curved` — [`LMID-curved-puncture`](LMID-curved-puncture)
+
+Distribution `lemaitre-initial-data-curved`. **Skeleton — no physics yet.**
+
+The non-conformally-flat successor: the same ABT chart, the same Newton–Krylov
+solver, and the same parametric layer, with the conformally flat background
+replaced by an attenuated superposition of quasi-isotropic conformally-**Kerr**
+and Lorentz-boosted-Schwarzschild 3-metrics. The motivation is spin: above
+χ ≈ 0.93 conformally flat data does not exist at all, which is the published
+model's own stated limitation. It reuses `conformally_flat` directly — the chart,
+the Newton–Krylov solver and the ROM — and so depends on it.
 
 ## Install
 
 ```bash
-pip install -e ".[dev]"        # editable install + pytest
-python -c "import lm; lm.initial_data"   # smoke check
+E="--config-settings editable_mode=compat"
+pip install -e . $E                                  # this umbrella (pulls `lemaitre`)
+pip install -e LMID-conformally-flat-puncture $E     # the published model
+pip install -e LMID-curved-puncture $E               # the successor skeleton
+
+python -c "import lemaitre as lm; lm.initial_data.conformally_flat"
 ```
 
-Pure Python: `jax`, `numpy`, `scipy`, `matplotlib` (float64 throughout). No
-machine-learning framework and no external solver code are required — the
-package is self-contained (enforced by a test guard).
+The umbrella depends only on the `lemaitre` core. The solver stack (`jax`,
+`numpy`, `scipy`, `matplotlib`) comes with whichever model you install; both are
+self-contained beyond it, enforced by a test guard.
 
-## Layout
-
-```
-src/lm/initial_data/
-  solver/         spatial elliptic (xCFC) solver — production 3-D stack + base layers
-  parametric/     parameter-space collocation, Hermite/Smolyak, POD — the ROM
-  applications/   parameter targeting, eccentricity control, differentiable sensitivity
-  validation/     TwoPunctures oracle wrapper + ADM / constraint diagnostics
-tests/            acceptance suite (float64, CPU)
-pipeline/
-  figures/        canonical per-figure data producers
-  models/         canonical surrogate-model builders (heavy; cluster)
-paper/            paper.tex + figures/ (recompute + plot scripts)
-docs/             DATA.md (data regeneration + oracle) · STRUCTURE.md (package map)
-```
-
-## Reproduce the paper
-
-```bash
-make test        # run the acceptance suite
-make figures     # regenerate every figure's data (recompute) then plot the PDFs
-```
-
-Figure data is **recomputed** from the solver / ROM (not read from cached JSON).
-Two tiers, see `docs/DATA.md`:
-
-- **laptop tier** — fast figures rebuild from the shipped surrogate model artifacts;
-- **heavy tier** — the χ surrogate corpora (`make models`, cluster) and the
-  TwoPunctures validation binary (`make oracle`) back the two validation figures;
-  a small committed `figdata/` fallback keeps `pdflatex` working without them.
+Each submodule builds, tests and releases on its own — see its `README.md` for
+the acceptance suite and, for `conformally_flat`, the paper-reproduction targets.
 
 ## License
 

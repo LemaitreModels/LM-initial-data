@@ -3,31 +3,29 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "LM-initial-data"
+name = "lemaitre-initial-data"
 version = "0.1.0"
-description = "Certified, differentiable, parametric binary-black-hole initial data — lm.initial_data"
+description = "Umbrella for the LemaitreModels initial-data models (lemaitre.initial_data.*)"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [{ name = "Frederik De Ceuster" }]
+
+# The umbrella owns the `lemaitre.initial_data` namespace level and nothing else,
+# so its only dependency is the namespace root.  The solver stack
+# (jax/numpy/scipy/matplotlib) belongs to the model leaves.
 dependencies = [
-    "numpy",
-    "scipy",
-    "jax",
-    "matplotlib",
+    "lemaitre",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest"]
 
-# src/ layout.  Ships the shared `lm` namespace root plus the
-# `lm.initial_data` subpackage tree.
+# src/ layout, `find_namespace` scoped to this level only.  `lemaitre/` itself has
+# no `__init__.py` here — the core owns it — so plain `find` would skip the tree;
+# `namespaces = true` walks through it and picks up `lemaitre.initial_data`, which
+# this distribution does own.
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["lm*"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-markers = [
-    "slow: heavier B1 checks (external TwoPunctures oracle / Cartesian sweep)",
-]
+include = ["lemaitre.initial_data"]
+namespaces = true
