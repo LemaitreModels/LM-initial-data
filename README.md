@@ -11,15 +11,15 @@ its own repository and its own installable distribution.
 ```python
 import lemaitre as lm
 
-lm.initial_data.conformally_flat    # the published Bowen–York puncture model
-lm.initial_data.curved              # its non-conformally-flat successor
+lm.initial_data.conformally_flat_puncture    # the published Bowen–York puncture model
+lm.initial_data.curved_puncture              # its non-conformally-flat successor
 ```
 
 ## The two puncture models
 
-### `conformally_flat` — [`LMID-conformally-flat-puncture`](LMID-conformally-flat-puncture)
+### `conformally_flat_puncture` — [`LMID-conformally-flat-puncture`](LMID-conformally-flat-puncture)
 
-Distribution `lemaitre-initial-data-conformally-flat`. **The paper package.**
+Distribution `LMID-conformally-flat-puncture`. **The paper package.**
 
 Certified, differentiable, parametric reduced-order model of the constraint
 solve for quasi-circular **Bowen–York** punctures, up to the 8-D general-spin
@@ -28,16 +28,16 @@ prolate chart, matrix-free Newton–Krylov, and a Smolyak/Hermite/POD parameter-
 ROM exposing `solve(θ, guess)` and the tangent `dU/dθ`. Ships `paper/` — the code
 and the paper together.
 
-### `curved` — [`LMID-curved-puncture`](LMID-curved-puncture)
+### `curved_puncture` — [`LMID-curved-puncture`](LMID-curved-puncture)
 
-Distribution `lemaitre-initial-data-curved`. **Skeleton — no physics yet.**
+Distribution `LMID-curved-puncture`. **Skeleton — no physics yet.**
 
 The non-conformally-flat successor: the same ABT chart, the same Newton–Krylov
 solver, and the same parametric layer, with the conformally flat background
 replaced by an attenuated superposition of quasi-isotropic conformally-**Kerr**
 and Lorentz-boosted-Schwarzschild 3-metrics. The motivation is spin: above
 χ ≈ 0.93 conformally flat data does not exist at all, which is the published
-model's own stated limitation. It reuses `conformally_flat` directly — the chart,
+model's own stated limitation. It reuses `conformally_flat_puncture` directly — the chart,
 the Newton–Krylov solver and the ROM — and so depends on it.
 
 ## Install
@@ -48,7 +48,7 @@ pip install -e . $E                                  # this umbrella (pulls `lem
 pip install -e LMID-conformally-flat-puncture $E     # the published model
 pip install -e LMID-curved-puncture $E               # the successor skeleton
 
-python -c "import lemaitre as lm; lm.initial_data.conformally_flat"
+python -c "import lemaitre as lm; lm.initial_data.conformally_flat_puncture"
 ```
 
 The umbrella depends only on the `lemaitre` core. The solver stack (`jax`,
@@ -56,7 +56,7 @@ The umbrella depends only on the `lemaitre` core. The solver stack (`jax`,
 self-contained beyond it, enforced by a test guard.
 
 Each submodule builds, tests and releases on its own — see its `README.md` for
-the acceptance suite and, for `conformally_flat`, the paper-reproduction targets.
+the acceptance suite and, for `conformally_flat_puncture`, the paper-reproduction targets.
 
 ## License
 

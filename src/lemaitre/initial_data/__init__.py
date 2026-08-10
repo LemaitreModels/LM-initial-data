@@ -7,24 +7,23 @@ importing as siblings::
 
     import lemaitre as lm
 
-    lm.initial_data.conformally_flat    # LMID-conformally-flat-puncture
-    lm.initial_data.curved              # LMID-curved-puncture
+    lm.initial_data.conformally_flat_puncture    # LMID-conformally-flat-puncture
+    lm.initial_data.curved_puncture              # LMID-curved-puncture
 
-===========================================  ==================================
-namespace                                    distribution / repository
-===========================================  ==================================
-``lemaitre.initial_data``                    ``lemaitre-initial-data``
-                                             — *LM-initial-data* (this file)
-``lemaitre.initial_data.conformally_flat``   ``lemaitre-initial-data-``
-                                             ``conformally-flat``
-                                             — *LMID-conformally-flat-puncture*
-``lemaitre.initial_data.curved``             ``lemaitre-initial-data-curved``
-                                             — *LMID-curved-puncture*
-===========================================  ==================================
+===================================================  ==================================
+namespace                                            distribution / repository
+===================================================  ==================================
+``lemaitre.initial_data``                            ``lemaitre-initial-data``
+                                                     — *LM-initial-data* (this file)
+``lemaitre.initial_data.conformally_flat_puncture``  ``LMID-conformally-flat-puncture``
+``lemaitre.initial_data.curved_puncture``            ``LMID-curved-puncture``
+===================================================  ==================================
 
-**conformally_flat** is the published model: certified, differentiable,
+Each leaf's repository carries the same name as its distribution.
+
+**conformally_flat_puncture** is the published model: certified, differentiable,
 parametric Bowen–York puncture data on the Ansorg–Brügmann–Tichy chart, with the
-paper.  **curved** is its non-conformally-flat successor — the same chart and
+paper.  **curved_puncture** is its non-conformally-flat successor — the same chart and
 solver, a superposed quasi-isotropic-Kerr / boosted-Schwarzschild background —
 which reaches the spins conformal flatness cannot represent at all.
 
