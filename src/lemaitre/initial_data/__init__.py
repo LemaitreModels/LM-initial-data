@@ -13,13 +13,12 @@ importing as siblings::
 ===================================================  ==================================
 namespace                                            distribution / repository
 ===================================================  ==================================
-``lemaitre.initial_data``                            ``lemaitre-initial-data``
-                                                     — *LM-initial-data* (this file)
+``lemaitre.initial_data``                            ``LM-initial-data`` (this file)
 ``lemaitre.initial_data.conformally_flat_puncture``  ``LMID-conformally-flat-puncture``
 ``lemaitre.initial_data.curved_puncture``            ``LMID-curved-puncture``
 ===================================================  ==================================
 
-Each leaf's repository carries the same name as its distribution.
+Every distribution carries the name of its repository.
 
 **conformally_flat_puncture** is the published model: certified, differentiable,
 parametric Bowen–York puncture data on the Ansorg–Brügmann–Tichy chart, with the
@@ -33,7 +32,7 @@ This is the *second* namespace level, and it works exactly like the root:
 attribute access.
 
 Family bookkeeping: exactly ONE installed distribution may own this
-``lemaitre/initial_data/__init__.py``, and that is ``lemaitre-initial-data``.
+``lemaitre/initial_data/__init__.py``, and that is ``LM-initial-data``.
 The model leaves ship only their own leaf package — never this file, and never
 ``lemaitre/__init__.py`` (which belongs to the ``lemaitre`` core).
 """
