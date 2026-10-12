@@ -5,3 +5,7 @@
 	path = LMID-curved-puncture
 	url = ../LMID-curved-puncture.git
 	update = none
+[submodule "LMID-radiative-puncture"]
+	path = LMID-radiative-puncture
+	url = ../LMID-radiative-puncture.git
+	update = none

@@ -9,6 +9,7 @@ importing as siblings::
 
     lm.initial_data.conformally_flat_puncture    # LMID-conformally-flat-puncture
     lm.initial_data.curved_puncture              # LMID-curved-puncture
+    lm.initial_data.radiative_puncture           # LMID-radiative-puncture
 
 ===================================================  ==================================
 namespace                                            distribution / repository
@@ -16,6 +17,7 @@ namespace                                            distribution / repository
 ``lemaitre.initial_data``                            ``LM-initial-data`` (this file)
 ``lemaitre.initial_data.conformally_flat_puncture``  ``LMID-conformally-flat-puncture``
 ``lemaitre.initial_data.curved_puncture``            ``LMID-curved-puncture``
+``lemaitre.initial_data.radiative_puncture``         ``LMID-radiative-puncture``
 ===================================================  ==================================
 
 Every distribution carries the name of its repository.
@@ -25,6 +27,7 @@ parametric Bowen–York puncture data on the Ansorg–Brügmann–Tichy chart, w
 paper.  **curved_puncture** is its non-conformally-flat successor — the same chart and
 solver, a superposed quasi-isotropic-Kerr / boosted-Schwarzschild background —
 which reaches the spins conformal flatness cannot represent at all.
+**radiative_puncture** is in preparation.
 
 This is the *second* namespace level, and it works exactly like the root:
 ``pkgutil.extend_path`` merges every ``lemaitre/initial_data/`` directory on

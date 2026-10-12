@@ -6,7 +6,7 @@ initial data.
 
 This repository is the *umbrella*. It owns the `lemaitre.initial_data` namespace
 level and ships no science — a single `__init__.py`, no solver, no model. The
-science lives in the two submodules below, each its own repository and its own
+science lives in the submodules below, each its own repository and its own
 installable distribution.
 
 ```python
@@ -14,6 +14,7 @@ import lemaitre as lm
 
 lm.initial_data.conformally_flat_puncture    # the Bowen–York puncture model — the paper package
 lm.initial_data.curved_puncture              # its non-conformally-flat successor
+lm.initial_data.radiative_puncture           # in preparation
 ```
 
 Attribute access is lazy (PEP 562), and `pkgutil.extend_path` merges every
@@ -21,7 +22,7 @@ Attribute access is lazy (PEP 562), and `pkgutil.extend_path` merges every
 import as siblings without either knowing where the other lives. Exactly one
 installed distribution may own this namespace level, and that is this one.
 
-## The two puncture models
+## The puncture models
 
 ### `conformally_flat_puncture` — [`LMID-conformally-flat-puncture`](LMID-conformally-flat-puncture)
 
@@ -64,6 +65,12 @@ and so requires it; nothing in `conformally_flat_puncture` imports the successor
 > otherwise take the rest of the tree down with it. If you have access, add it
 > with `git submodule update --init --recursive --checkout`.
 
+### `radiative_puncture` — `LMID-radiative-puncture`
+
+Distribution `LMID-radiative-puncture`. **In preparation — the repository is not
+open yet**, and it is marked `update = none` in `.gitmodules` for the same reason
+as `curved_puncture`.
+
 ## Install
 
 Both namespace parents — `lemaitre` and `LM-initial-data` — are published on
@@ -81,7 +88,8 @@ done
 python -c "import lemaitre as lm; lm.initial_data.conformally_flat_puncture"   # smoke check
 ```
 
-Add `LM-initial-data/LMID-curved-puncture` to that loop only if you have access
+Add `LM-initial-data/LMID-curved-puncture` (and after it
+`LM-initial-data/LMID-radiative-puncture`) to that loop only if you have access
 to it; the directory is empty otherwise.
 
 Both flags are load-bearing, and for different reasons. **`--no-deps` and the
