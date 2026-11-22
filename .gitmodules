@@ -9,3 +9,6 @@
 	path = LMID-radiative-puncture
 	url = ../LMID-radiative-puncture.git
 	update = none
+[submodule "LMID-pm-history-puncture"]
+	path = LMID-pm-history-puncture
+	url = git@github.com:LemaitreModels/LMID-pm-history-puncture.git
